@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>会议室信息查询</title>
+	<title>会议室信息显示</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- 引入bootstrap -->
@@ -28,13 +28,17 @@
 				<div class="panel panel-default">
 				    <div class="panel-heading">
 						<div class="row">
-					    	<h1 class="col-md-5">会议室信息查询</h1>
-							<form class="bs-example bs-example-form col-md-5" role="form" style="margin: 20px 0 10px 0;" action="${pageContext.request.contextPath}/ordinary/queryRoom" id="form1" method="post">
+					    	<h1 class="col-md-5">会议室信息管理</h1>
+							<form class="bs-example bs-example-form col-md-5" role="form" style="margin: 20px 0 10px 0;" action="${pageContext.request.contextPath}/admin/queryRoom" id="form1" method="post">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="请输入会议室" name="findByName">
 									<span class="input-group-addon btn" onclick="document.getElementById('form1').submit" id="sub">搜索</span>
 								</div>
 							</form>
+							<button class="btn btn-default col-md-2" style="margin-top: 20px" onClick="location.href='${pageContext.request.contextPath}/admin/addRoom'">
+								添加会议室信息
+								<sapn class="glyphicon glyphicon-plus"/>
+							</button>
 
 						</div>
 				    </div>
@@ -43,18 +47,22 @@
 					            <tr>
 									<th>会议室编号</th>
 									<th>会议室名称</th>
-									<th>楼层</th>
-									<th>座位数</th>
 									<th>详细信息</th>
+									<th>操作</th>
 					            </tr>
+					        </thead>
 					        <tbody>
 							<c:forEach  items="${roomList}" var="item">
 								<tr>
 									<td>${item.id}</td>
 									<td>${item.name}</td>
-									<td>${item.floor}</td>
-									<td>${item.seat}</td>
 									<td>${item.message}</td>
+									<td>
+										<button class="btn btn-default btn-xs btn-info" onClick="location.href='${pageContext.request.contextPath}/admin/editRoom?id=${item.id}'">修改</button>
+										<button class="btn btn-default btn-xs btn-danger btn-primary" onclick="removeRoom(${item.id})">删除</button>
+										<%--<button class="btn btn-default btn-xs btn-danger btn-primary" onClick="location.href='${pageContext.request.contextPath}/admin/removeRoom?id=${item.id}'">删除</button>--%>
+										<!--弹出框-->
+									</td>
 								</tr>
 							</c:forEach>
 					        </tbody>
@@ -63,21 +71,21 @@
 						<c:if test="${pagingVO != null}">
 							<nav style="text-align: center">
 								<ul class="pagination">
-									<li><a href="${pageContext.request.contextPath}/ordinary/showRoom?page=${pagingVO.upPageNo}">&laquo;上一页</a></li>
+									<li><a href="${pageContext.request.contextPath}/admin/showRoom?page=${pagingVO.upPageNo}">&laquo;上一页</a></li>
 									<li class="active"><a href="">${pagingVO.curentPageNo}</a></li>
 									<c:if test="${pagingVO.curentPageNo+1 <= pagingVO.totalCount}">
-										<li><a href="${pageContext.request.contextPath}/ordinary/showRoom?page=${pagingVO.curentPageNo+1}">${pagingVO.curentPageNo+1}</a></li>
+										<li><a href="${pageContext.request.contextPath}/admin/showRoom?page=${pagingVO.curentPageNo+1}">${pagingVO.curentPageNo+1}</a></li>
 									</c:if>
 									<c:if test="${pagingVO.curentPageNo+2 <= pagingVO.totalCount}">
-										<li><a href="${pageContext.request.contextPath}/ordinary/showRoom?page=${pagingVO.curentPageNo+2}">${pagingVO.curentPageNo+2}</a></li>
+										<li><a href="${pageContext.request.contextPath}/admin/showRoom?page=${pagingVO.curentPageNo+2}">${pagingVO.curentPageNo+2}</a></li>
 									</c:if>
 									<c:if test="${pagingVO.curentPageNo+3 <= pagingVO.totalCount}">
-										<li><a href="${pageContext.request.contextPath}/ordinary/showRoom?page=${pagingVO.curentPageNo+3}">${pagingVO.curentPageNo+3}</a></li>
+										<li><a href="${pageContext.request.contextPath}/admin/showRoom?page=${pagingVO.curentPageNo+3}">${pagingVO.curentPageNo+3}</a></li>
 									</c:if>
 									<c:if test="${pagingVO.curentPageNo+4 <= pagingVO.totalCount}">
-										<li><a href="${pageContext.request.contextPath}/ordinary/showRoom?page=${pagingVO.curentPageNo+4}">${pagingVO.curentPageNo+4}</a></li>
+										<li><a href="${pageContext.request.contextPath}/admin/showRoom?page=${pagingVO.curentPageNo+4}">${pagingVO.curentPageNo+4}</a></li>
 									</c:if>
-									<li><a href="${pageContext.request.contextPath}/ordinary/showRoom?page=${pagingVO.totalCount}">最后一页&raquo;</a></li>
+									<li><a href="${pageContext.request.contextPath}/admin/showRoom?page=${pagingVO.totalCount}">最后一页&raquo;</a></li>
 								</ul>
 							</nav>
 						</c:if>
@@ -94,7 +102,7 @@
 	</div>
 </body>
 	<script type="text/javascript">
-		<%--设置菜单中选中背景色改变,不同导航栏,nth-child(1)中参数1不可重复--%>
+		<%--设置菜单中选中背景色改变,nth-child(1)中参数1表示第1个导航栏，参数不可重复--%>
 		$("#nav li:nth-child(1)").addClass("active")
 
         <c:if test="${pagingVO != null}">
@@ -108,9 +116,9 @@
         </c:if>
 
         function removeRoom(id) {
-			if(confirm('确实要删除该客户吗?')) {
-				$.post("${pageContext.request.contextPath}/ordinary/removeRoom",{"id":id},function(data){
-					alert("客户删除更新成功！");
+			if(confirm('确认要删除该会议室吗?')) {
+				$.post("${pageContext.request.contextPath}/admin/removeRoom",{"id":id},function(data){
+					alert("会议室删除更新成功！");
 					window.location.reload();
 				});
 			}

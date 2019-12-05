@@ -16,9 +16,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入bootstrap -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-validator/bootstrapValidator.min.css">
     <!-- 引入JQuery  bootstrap.js-->
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrapValidator.min.js"></script>
+
 
     <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
 
@@ -54,8 +57,8 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form"
-                          action="${pageContext.request.contextPath}/ordinary/reserveRoom" id="editfrom" method="post">
+                    <form class="form-horizontal" id="editform"
+                          action="${pageContext.request.contextPath}/ordinary/reserveRoom" method="post">
 
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">会议室名称</label>
@@ -107,9 +110,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label" name="beginTime">开始时间</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label">开始时间</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="beginTime">
+                                <select class="form-control" id="beginTime">
                                     <option >9:00:00</option>
                                     <option >9:30:00</option>
                                     <option >10:00:00</option>
@@ -133,9 +136,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label" name="endTime">结束时间</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label" >结束时间</label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="endTime">
+                                <select class="form-control" id="endTime">
                                     <option >9:00:00</option>
                                     <option >9:30:00</option>
                                     <option >10:00:00</option>
@@ -203,7 +206,44 @@
     }
 
     $("#sub").click(function () {
+        //$("#unitForm").bootstrapValidator;
         $("#form1").submit();
     });
+
+
+    //校验表单
+    /*function checkForm(){
+        $("#unitForm").bootstrapValidator({
+            group: 'div[class*="col-sm"]',//显示消息的位置元素，追加在最后
+            beginTime: {
+                validators: {
+                    notEmpty: {
+                        message: '请选择开始时间'
+                    }
+                }
+            },
+            endTime: {
+                validators: {
+                    notEmpty: {
+                        message: '请选择结束时间'
+                    },
+                    callback: {
+                        message: '开始时间必须小于结束时间',
+                        callback: function (value, validator, $field) {
+                            var other = validator.getFieldElements('beginTime').val();//获得另一个的值
+
+                            var start = new Date(other.replace("-", "/").replace("-", "/"));
+                            var end = new Date(value.replace("-", "/").replace("-", "/"));
+
+                            if (start <= end) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+        });
+    }*/
 </script>
 </html>

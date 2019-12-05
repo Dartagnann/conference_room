@@ -85,12 +85,12 @@ CREATE TABLE `room` (
 -- ----------------------------
 -- Records of room
 -- ----------------------------
-INSERT INTO `room` VALUES ('1', 'J305', '00','00','大型会议室，可使用多媒体，适合开会、讲座');
-INSERT INTO `room` VALUES ('2', '第一会议室327', '00','00','能够使用多媒体，适合组会，论文答辩');
-INSERT INTO `room` VALUES ('3', '第三会议室329','00','00', '能够使用多媒体，适合开组会，硕/博士毕业论文答辩');
-INSERT INTO `room` VALUES ('4', 'J123','00','00', '大型会议室，可容纳200人，适合举办讲座');
-INSERT INTO `room` VALUES ('5', 'J226', '00','00','小包间会议室，适合小组讨论');
-INSERT INTO `room` VALUES ('6', 'J211', '00','00','小会议室，适合二十人小型会议，含多媒体');
+INSERT INTO `room` VALUES ('1', 'A105', '1','100','大型会议室，可使用多媒体，适合开会、讲座');
+INSERT INTO `room` VALUES ('2', 'B202', '2','20','能够使用多媒体，适合组会，论文答辩');
+INSERT INTO `room` VALUES ('3', 'B309','3','25', '能够使用多媒体，适合开组会，硕/博士毕业论文答辩');
+INSERT INTO `room` VALUES ('4', 'J603','6','200', '大型会议室，可容纳200人，适合举办讲座');
+INSERT INTO `room` VALUES ('5', 'C408', '4','10','小包间会议室，适合小组讨论');
+INSERT INTO `room` VALUES ('6', 'C205', '2','20','小会议室，适合二十人小型会议，含多媒体');
 
 -- ----------------------------
 -- Table structure for user

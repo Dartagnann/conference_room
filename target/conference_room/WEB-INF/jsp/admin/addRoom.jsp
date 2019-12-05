@@ -38,10 +38,25 @@
 						</div>
 
 						<div class="form-group">
+							<label for="inputPassword3" class="col-sm-2 control-label">楼层</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="floor" placeholder="请输入楼层">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputPassword3" class="col-sm-2 control-label">座位数</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="seat" placeholder="请输入座位数">
+							</div>
+						</div>
+
+						<div class="form-group">
 							<label for="inputPassword3" class="col-sm-2 control-label">详细信息</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" name="message" placeholder="请录入会议室详细信息">
 							</div>
+						</div>
 
 						<div class="form-group" style="text-align: center">
 							<button class="btn btn-default" type="submit">提交</button>

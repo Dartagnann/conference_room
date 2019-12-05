@@ -47,6 +47,8 @@
 					            <tr>
 									<th>会议室编号</th>
 									<th>会议室名称</th>
+									<th>楼层数</th>
+									<th>座位数</th>
 									<th>详细信息</th>
 									<th>操作</th>
 					            </tr>
@@ -56,6 +58,8 @@
 								<tr>
 									<td>${item.id}</td>
 									<td>${item.name}</td>
+									<td>${item.floor}</td>
+									<td>${item.seat}</td>
 									<td>${item.message}</td>
 									<td>
 										<button class="btn btn-default btn-xs btn-info" onClick="location.href='${pageContext.request.contextPath}/admin/editRoom?id=${item.id}'">修改</button>

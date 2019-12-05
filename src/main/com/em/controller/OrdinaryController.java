@@ -114,6 +114,13 @@ public class OrdinaryController {
     //预约会议室功能实现
     @RequestMapping(value = "/reserveRoom", method = RequestMethod.POST)
     public String reserveRoom(ReservationCustom reservationCustom) throws Exception {
+
+        reservationService.addReservation(reservationCustom);
+
+        return "redirect:/ordinary/showRecord";
+    }
+    /*@RequestMapping(value = "/reserveRoom", method = RequestMethod.POST)
+    public String reserveRoom(ReservationCustom reservationCustom) throws Exception {
         try {
             if (reservationCustom.getBeginTime().compareTo(reservationCustom.getEndTime())>0){
                 reservationService.addReservation(reservationCustom);
@@ -125,7 +132,7 @@ public class OrdinaryController {
         }
 
         return "redirect:/ordinary/showRecord";
-    }
+    }*/
 
     //取消预约申请页面跳转
     @RequestMapping(value = "/cancelApplication",method = RequestMethod.GET)

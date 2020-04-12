@@ -16,12 +16,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入bootstrap -->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/bootstrap-validator/bootstrapValidator.min.css">
     <!-- 引入JQuery  bootstrap.js-->
     <script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/bootstrapValidator.min.js"></script>
-
 
     <%--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">--%>
 
@@ -32,12 +29,9 @@
     String currDate = dateFormat.format(new Date());
     List dateList=new ArrayList();
     for (int i = 0; i < 16; i++) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateFormat.parse(currDate));
-
         calendar.add(Calendar.DAY_OF_MONTH, i);
-
         String nextDay= dateFormat.format(calendar.getTime());
         dateList.add(nextDay);
     }
@@ -57,8 +51,8 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form class="form-horizontal" id="editform"
-                          action="${pageContext.request.contextPath}/ordinary/reserveRoom" method="post">
+                    <form class="form-horizontal" role="form"
+                          action="${pageContext.request.contextPath}/ordinary/reserveRoom" id="editfrom" method="post">
 
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">会议室名称</label>
@@ -110,9 +104,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label">开始时间</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label" name="beginTime">开始时间</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="beginTime">
+                                <select class="form-control" name="beginTime">
                                     <option >9:00:00</option>
                                     <option >9:30:00</option>
                                     <option >10:00:00</option>
@@ -136,9 +130,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword3" class="col-sm-2 control-label" >结束时间</label>
+                            <label for="inputPassword3" class="col-sm-2 control-label" name="endTime">结束时间</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="endTime">
+                                <select class="form-control" name="endTime">
                                     <option >9:00:00</option>
                                     <option >9:30:00</option>
                                     <option >10:00:00</option>
@@ -183,38 +177,31 @@
 <script type="text/javascript">
     <%--设置菜单中--%>
     $("#nav li:nth-child(3)").addClass("active")
-
     <c:if test="${pagingVO != null}">
     if (${pagingVO.curentPageNo} == ${pagingVO.totalCount}) {
         $(".pagination li:last-child").addClass("disabled")
     }
     ;
-
     if (${pagingVO.curentPageNo} == ${1}) {
         $(".pagination li:nth-child(1)").addClass("disabled")
     }
     ;
     </c:if>
-
-    function confirmd() {
-        var msg = "您真的确定要删除吗？！";
-        if (confirm(msg) == true) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    $("#sub").click(function () {
-        //$("#unitForm").bootstrapValidator;
-        $("#form1").submit();
-    });
-
-
     //校验表单
     /*function checkForm(){
         $("#unitForm").bootstrapValidator({
+            //submitHandler: function (valiadtor, loginForm, submitButton) {
+            //    valiadtor.defaultSubmit();
+            //},
             group: 'div[class*="col-sm"]',//显示消息的位置元素，追加在最后
+            // fields: {
+            //     unitEnglish: {
+            //         validators: {
+            //             notEmpty: {
+            //                 message: '英文名不能为空'
+            //             }
+            //         }
+            //     },
             beginTime: {
                 validators: {
                     notEmpty: {
@@ -245,5 +232,16 @@
             }
         });
     }*/
+    function confirmd() {
+        var msg = "您真的确定要删除吗？！";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    $("#sub").click(function () {
+        $("#form1").submit();
+    });
 </script>
 </html>

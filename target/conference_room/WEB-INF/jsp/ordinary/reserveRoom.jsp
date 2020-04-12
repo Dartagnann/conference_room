@@ -29,12 +29,9 @@
     String currDate = dateFormat.format(new Date());
     List dateList=new ArrayList();
     for (int i = 0; i < 16; i++) {
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateFormat.parse(currDate));
-
         calendar.add(Calendar.DAY_OF_MONTH, i);
-
         String nextDay= dateFormat.format(calendar.getTime());
         dateList.add(nextDay);
     }
@@ -180,19 +177,61 @@
 <script type="text/javascript">
     <%--设置菜单中--%>
     $("#nav li:nth-child(3)").addClass("active")
-
     <c:if test="${pagingVO != null}">
     if (${pagingVO.curentPageNo} == ${pagingVO.totalCount}) {
         $(".pagination li:last-child").addClass("disabled")
     }
     ;
-
     if (${pagingVO.curentPageNo} == ${1}) {
         $(".pagination li:nth-child(1)").addClass("disabled")
     }
     ;
     </c:if>
+    //校验表单
+    /*function checkForm(){
+        $("#unitForm").bootstrapValidator({
+            //submitHandler: function (valiadtor, loginForm, submitButton) {
+            //    valiadtor.defaultSubmit();
+            //},
+            group: 'div[class*="col-sm"]',//显示消息的位置元素，追加在最后
+            // fields: {
+            //     unitEnglish: {
+            //         validators: {
+            //             notEmpty: {
+            //                 message: '英文名不能为空'
+            //             }
+            //         }
+            //     },
+            beginTime: {
+                validators: {
+                    notEmpty: {
+                        message: '请选择开始时间'
+                    }
+                }
+            },
+            endTime: {
+                validators: {
+                    notEmpty: {
+                        message: '请选择结束时间'
+                    },
+                    callback: {
+                        message: '开始时间必须小于结束时间',
+                        callback: function (value, validator, $field) {
+                            var other = validator.getFieldElements('beginTime').val();//获得另一个的值
 
+                            var start = new Date(other.replace("-", "/").replace("-", "/"));
+                            var end = new Date(value.replace("-", "/").replace("-", "/"));
+
+                            if (start <= end) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    }
+                }
+            }
+        });
+    }*/
     function confirmd() {
         var msg = "您真的确定要删除吗？！";
         if (confirm(msg) == true) {
@@ -201,7 +240,6 @@
             return false;
         }
     }
-
     $("#sub").click(function () {
         $("#form1").submit();
     });

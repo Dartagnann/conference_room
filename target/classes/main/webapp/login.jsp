@@ -11,7 +11,9 @@
 	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	<style type="text/css">
 	body{
-	   background: url(images/view.jpg)repeat;
+	   background: url(images/view4.jpg)no-repeat;
+		background-size:100% 100%;
+		background-attachment: fixed;
 	}
 	#login-box {
 		/*border:1px solid #F00;*/

@@ -41,6 +41,18 @@
 							      <input type="text" class="form-control" id="inputPassword3" name="name" value="${roomList.name}" placeholder="请输入会议室名称">
 							    </div>
 							  </div>
+							<div class="form-group">
+								<label for="inputPassword3" class="col-sm-2 control-label">楼层</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="floor" value="${roomList.floor}" placeholder="请输入楼层">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputPassword3" class="col-sm-2 control-label">座位数</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" name="seat" value="${roomList.seat}" placeholder="请输入座位数">
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label for="inputPassword3" class="col-sm-2 control-label">会议室详细信息</label>

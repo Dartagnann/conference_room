@@ -189,4 +189,16 @@ public class AdminController {
         }
         return "redirect:/admin/userRegister";
     }
+
+    @RequestMapping(value = "/unKnown")
+    public String unKnow(){
+        System.out.println("未知账号！（提示：若已成功注册，请联系管理员查看用户是否已激活。）");
+        return "redirect:/admin/unKnown";
+    }
+
+    @RequestMapping(value = "/error")
+    public String error(){
+        System.out.println("密码输入错误！请您重新输入！");
+        return "redirect:/admin/error";
+    }
 }
